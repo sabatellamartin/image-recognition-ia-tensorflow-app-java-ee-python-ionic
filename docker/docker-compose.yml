@@ -1,0 +1,132 @@
+# Version
+# https://docs.docker.com/compose/compose-file/compose-file-v2/#reference-and-guidelines
+# Version de docker 17.12.0+ corresponde a un archivo de version 3.5	(17.12.0+, 3.5)
+version: '3.5'
+
+# Servicios
+services:
+
+  # TensorFlow
+  tensorflow:
+    build:
+      context: tensorflow/
+    container_name: "tensorflow-celerity"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./tensorflow/source:/notebooks/source
+      - ./tensorflow/shared:/notebooks/source/shared:ro
+    ports:
+      - 8888:8888
+      - 5000:5000
+    depends_on:
+      - wildfly
+    links:
+      - wildfly:wildlfy
+    networks:
+      internal:
+        ipv4_address: 172.27.1.5
+
+  # Postgres 9.6 + Postgis 2.4
+  postgres:
+    build:
+      context: postgres/
+    container_name: "postgres-celerity"
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      #POSTGRES_DBNAME: celerity
+      ALLOW_IP_RANGE: 0.0.0.0/0
+    volumes:
+      - ./postgres/postgres-data:/var/lib/postgresql
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    networks:
+      internal:
+        ipv4_address: 172.27.1.4
+
+  # Mongo
+  mongodb:
+    build:
+      context: mongo/
+    container_name: "mongo-celerity"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./mongo/data/db:/data/db
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    networks:
+      internal:
+        ipv4_address: 172.27.1.3
+
+  # Wildfly
+  wildfly:
+    build:
+      context: wildfly/
+    container_name: "wildfly-celerity"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./tensorflow/shared:/opt/shared
+    ports:
+      - 8080:8080
+      - 9990:9990
+    links:
+      - postgres:postgres
+      - mongodb:mongodb
+    depends_on:
+      - postgres
+    restart: on-failure
+    networks:
+      internal:
+        ipv4_address: 172.27.1.2
+
+  # Apache2 "httpd"
+  httpd:
+    build:
+      context: apache/
+    container_name: "httpd-celerity"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    depends_on:
+      - wildfly
+    links:
+      - wildfly:wildlfy
+    networks:
+      - external
+      - internal
+
+  # Nginx reverse-proxy
+  nginx:
+    build:
+      context: nginx/
+    container_name: "nginx-celerity"
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    ports:
+      - 82:80
+      #- 443:443
+    depends_on:
+      - httpd
+    networks:
+      - external
+
+# Redes
+networks:
+  external:
+  internal:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.27.1.0/24

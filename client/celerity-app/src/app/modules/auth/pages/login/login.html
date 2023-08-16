@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ 'login.title' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>{{ 'login.form.email' | translate }}</ion-label>
+      <ion-input type="text" #username></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>{{ 'login.form.password' | translate }}</ion-label>
+      <ion-input type="password" #password></ion-input>
+    </ion-item>
+
+    <div padding id="topButtons">
+      <button ion-button (click)="signUp()">{{ 'login.form.signup' | translate }}</button>
+      <button ion-button (click)="signIn()">{{ 'login.form.signin' | translate }}</button>
+    </div>
+
+  </ion-list>
+
+  <div padding>
+  <!--  <button ion-button block (click)="signInGP()" *ngIf="!userReady">{{ 'login.social.google' | translate }}</button>-->
+  <!--  <button ion-button block (click)="signInFB()" *ngIf="!userReady">{{ 'login.social.facebook' | translate }}</button>-->
+  </div>
+
+</ion-content>

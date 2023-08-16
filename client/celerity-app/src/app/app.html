@@ -1,0 +1,35 @@
+<ion-menu [content]="content">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>{{ 'menu.title' | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+
+      <ion-item *ngIf="session" (click)="goToProfile()" menuClose>
+        <ion-avatar item-start>
+          <img [src]="session.picture">
+        </ion-avatar>
+        <h2>{{session.name}}</h2>
+        <p>{{session.email}}</p>
+        <!--<button ion-button clear item-end (click)="logout(session.token_type)" menuClose>
+          <ion-icon name="log-out"></ion-icon>
+        </button>-->
+      </ion-item>
+      <button ion-item *ngFor="let p of pages" (click)="openPage(p)" menuClose>
+        {{p.title}}
+      </button>
+      <button ion-item *ngIf="session" (click)="logout(session.token_type)" menuClose>
+        {{ 'home.logout' | translate }}
+      </button>
+
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

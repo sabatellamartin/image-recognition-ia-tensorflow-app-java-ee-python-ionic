@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ 'profile.title' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img src="{{client.picture}}">
+      </ion-thumbnail>
+      <h2>{{client.firstname}} {{client.lastname}}</h2>
+      <p>{{ 'profile.creation' | translate }} {{client.creation | date }}</p>
+      <button ion-button icon-start clear small (click)="goToSetPassword()">
+        <ion-icon name="key"></ion-icon>
+        <div>{{ 'profile.password' | translate }}</div>
+      </button>
+    </ion-item>
+  </ion-card>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label>{{ 'profile.form.first' | translate }}</ion-label>
+      <ion-input type="text"
+      [(ngModel)]="client.firstname"
+      [ngModelOptions]="{standalone: true}"
+      required
+      [disabled]="!localAuth"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{ 'profile.form.last' | translate }}</ion-label>
+      <ion-input type="text"
+      [(ngModel)]="client.lastname"
+      [ngModelOptions]="{standalone: true}"
+      required
+      [disabled]="!localAuth"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{ 'profile.form.email' | translate }}</ion-label>
+      <ion-input type="email"
+      [(ngModel)]="client.email"
+      [ngModelOptions]="{standalone: true}"
+      required disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{ 'profile.form.picture' | translate }}</ion-label>
+      <ion-input type="url" maxlength="255"
+      [(ngModel)]="client.picture"
+      [ngModelOptions]="{standalone: true}"
+      required
+      [disabled]="!localAuth"></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button block outline small (click)="setDefaultImage()" [disabled]="!localAuth">{{ 'profile.form.default' | translate }}</button>
+    </ion-item>
+  </ion-list>
+
+  <div padding>
+    <button ion-button block (click)="showConfirm()" [disabled]="!localAuth">{{ 'profile.form.update' | translate }}</button>
+  </div>
+
+</ion-content>

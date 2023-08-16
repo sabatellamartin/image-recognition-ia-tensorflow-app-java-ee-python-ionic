@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ 'settings.title' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>{{ 'settings.option.language' | translate }}</ion-label>
+      <ion-select
+        [(ngModel)]="selectedLanguage"
+        [(ngModel)]="language"
+        [ngModelOptions]="{standalone: true}"
+        (ngModelChange)="onChangeLanguage($event)"
+        required>
+        <ion-option value="default">{{ 'settings.languages.default' | translate }}</ion-option>
+        <ion-option [value]="language" *ngFor="let language of languages">{{ language.name }} ({{ language.code }})</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>{{ 'settings.option.traduction' | translate }}</ion-label>
+      <ion-select
+        [(ngModel)]="selectedTraduction"
+        [ngModelOptions]="{standalone: true}"
+        (ngModelChange)="onChangeTraduction($event)"
+        required>
+        <ion-option value="default">{{ 'settings.languages.default' | translate }}</ion-option>
+        <ion-option [value]="traduction" *ngFor="let traduction of traductions">{{ traduction.name }} ({{ traduction.code }})</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button block outline small (click)="setDefault()">{{ 'settings.languages.default' | translate }}</button>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

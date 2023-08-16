@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ 'home.title' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <img id="homeLogo" src="./assets/imgs/logo.png"/>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        Photo Recognition
+        <p>{{ 'home.legend' | translate }}</p>
+      </ion-card-title>
+      <p>{{ 'home.text' | translate }}</p>
+      <p><a href="http://celerity.localhost">Celerity project website.</a></p>
+    </ion-card-content>
+  </ion-card>
+
+  <button ion-button block *ngFor="let p of pages" (click)="openPage(p)">
+    {{p.title}}
+  </button>
+
+  <!--
+  <div *ngIf="!session">
+    <button ion-button block (click)="signIn()">{{ 'home.start' | translate }}</button>
+  </div>
+
+  <div *ngIf="session">
+  </div>
+  -->
+
+
+  <!--
+  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <button ion-button (click)="saludar()">Saludar</button>
+  <p>
+    Saludar aqui: {{saludo}}
+  </p>
+  <div *ngIf="session" style="text-align:center">
+      <ion-avatar item-left>
+        <img [src]="session.picture" alt="">
+      </ion-avatar>
+      <h2>{{session.name}}</h2>
+      <p>{{session.email}}</p>
+    <button ion-button clear (click)="logout(session.token_type)">{{ 'home.logout' | translate }}</button>
+  </div>
+  -->
+
+</ion-content>

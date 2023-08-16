@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Photo recongnition</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Action Camera buttons -->
+  <div *ngIf="isCameraStarted" class="camera-background">
+    <ion-fab bottom center>
+      <button ion-fab (click)="takePicture()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-fab bottom right>
+      <button ion-fab (click)="switchCamera()">
+        <ion-icon name="reverse-camera"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-fab bottom left>
+      <button ion-fab (click)="backCamera()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-fab>
+  </div>
+
+  <!-- Camara access -->
+  <ion-fab right bottom  *ngIf="!isCameraStarted">
+    <button ion-fab (click)="startCamera()">
+      <ion-icon name="camera"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <!-- If picture exist -->
+  <div *ngIf="!isCameraStarted && picture" class="picture-container">
+
+    <ion-list>
+      <!-- Go To History -->
+      <ion-item>
+        <button ion-button block outline (click)="goToHistory()">
+          <ion-icon name="list"></ion-icon>&nbsp;&nbsp;
+          View recognition history
+        </button>
+      </ion-item>
+      <!-- Select traduccion language -->
+      <ion-item>
+        <ion-label>Traduction language</ion-label>
+        <ion-select
+          [(ngModel)]="selectedTraduction"
+          [ngModelOptions]="{standalone: true}"
+          (ngModelChange)="onChangeTraduction($event)"
+          required>
+          <ion-option [value]="traduction" *ngFor="let traduction of traductions">{{ traduction.name }} ({{ traduction.code }})</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <!-- Segment Tabs -->
+    <div padding style="margin-top:-30px;">
+      <ion-segment [(ngModel)]="selectedSegment">
+        <ion-segment-button value="translated">
+          {{ selectedTraduction.name }}
+        </ion-segment-button>
+        <ion-segment-button value="predictions">
+          English
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div [ngSwitch]="selectedSegment">
+
+      <ion-grid>
+        <ion-row class="border-row">
+          <ion-col col-9 class="border-row">Recognition result</ion-col>
+          <ion-col col-3 class="border-row">Probability</ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <!-- Result selected language -->
+      <ion-grid  *ngSwitchCase="'translated'">
+        <ion-row class="border-row" *ngFor="let t of classify.translated" (click)="itemSelected(p)">
+          <ion-col col-9>{{ t.description }}</ion-col>
+          <ion-col col-3>{{ t.score }}</ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <!-- Result default language -->
+      <ion-grid  *ngSwitchCase="'predictions'">
+        <ion-row class="border-row" *ngFor="let p of classify.predictions" (click)="itemSelected(p)">
+          <ion-col col-9>{{ p.description }}</ion-col>
+          <ion-col col-3>{{ p.score }}</ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </div>
+
+    <!-- Photo -->
+    <ion-card>
+      <img [src]="picture">
+    </ion-card>
+
+  </div>
+
+</ion-content>

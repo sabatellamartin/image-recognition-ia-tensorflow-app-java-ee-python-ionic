@@ -1,0 +1,71 @@
+{
+	"profile": {
+		"title": "Perfil",
+		"form": {
+			"first": "Nombre",
+			"last": "Apellido",
+			"email": "Correo electronico",
+			"picture": "Imagen URI",
+			"default": "Imagen por defecto",
+			"update": "Actualizar"
+		},
+		"creation": "Fecha creacion",
+		"password": "Asignar contrasena"
+	},
+	"password": {
+		"title": "Asignar contrasena",
+		"form": {
+			"actual": "Contrasena actual",
+			"new": "Nueva contrasena",
+			"repaeat": "Repita nueva contrasena",
+			"confirm": "Asignar"
+		},
+		"creation": "Fecha creacion"
+	},
+	"login": {
+		"title": "Iniciar sesion",
+		"form": {
+			"email": "Correo electronico",
+			"password": "Contrasena",
+			"signup": "Registrarse",
+			"signin": "Ingresar"
+		},
+		"social": {
+			"google": "Ingresar con Google+",
+			"facebook": "Ingresar con Facebook"
+		}
+	},
+	"home": {
+		"title": "Inicio",
+		"start": "Comenzar",
+		"logout": "Cerrar sesion",
+		"legend": "Reconocimiento de imágenes con traducción instantánea.",
+		"text": "Toma una foto y obtén el resultado de una IA en cualquier idioma. Basado en el modelo Inception-v3 de Tensorflow para el reconocimiento de imágenes."
+	},
+	"settings": {
+		"title": "Ajustes",
+		"languages": {
+			"default": "Predeterminado por ubicación",
+			"spanish": "Español",
+			"english": "Inglés"
+		},
+		"option": {
+			"language": "Lenguaje de la aplicacion",
+			"traduction": "Lenguaje de traduccion por defecto"
+		}
+	},
+	"menu": {
+		"title": "Menú",
+		"items": {
+			"home": "Inicio",
+			"history": "Historial de reconocimiento",
+			"recognition": "Reconocimiento por foto",
+			"login": "Iniciar sesion",
+			"register": "Registrarse",
+			"profile": "Perfil",
+			"password": "Contrasena",
+			"settings": "Ajustes",
+			"start": "Comenzar"
+		}
+	}
+}

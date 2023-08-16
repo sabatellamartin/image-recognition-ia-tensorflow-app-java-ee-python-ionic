@@ -1,0 +1,71 @@
+{
+	"profile": {
+		"title": "Profile",
+		"form": {
+			"first": "First name",
+			"last": "Last name",
+			"email": "Email",
+			"picture": "Picture URI",
+			"default": "Set default image",
+			"update": "Update"
+		},
+		"creation": "Creation date",
+		"password": "Set Password"
+	},
+	"password": {
+		"title": "Set password",
+		"form": {
+			"actual": "Actual password",
+			"new": "New password",
+			"repaeat": "Repeat new password",
+			"confirm": "Set Password"
+		},
+		"creation": "Creation date"
+	},
+	"login": {
+		"title": "Sign In",
+		"form": {
+			"email": "Email",
+			"password": "Password",
+			"signup": "Sign up",
+			"signin": "Login"
+		},
+		"social": {
+			"google": "Login with Google+",
+			"facebook": "Login with Facebook"
+		}
+	},
+	"home": {
+		"title": "Home",
+		"start": "Start",
+		"logout": "Logout",
+		"legend": "Image recognition with instant traduction.",
+		"text": "Take a picture and get the result of an AI in any language. Based on inception-v3 model of Tensorflow for image recognition."
+	},
+	"settings": {
+		"title": "Settings",
+		"languages": {
+			"default": "Default by location",
+			"spanish": "Spanish",
+			"english": "English"
+		},
+		"option": {
+			"language": "Application language",
+			"traduction": "Default traduction language"
+		}
+	},
+	"menu": {
+		"title": "Menu",
+		"items": {
+			"home": "Home",
+			"history": "Recognition history",
+			"recognition": "Photo recognition",
+			"login": "Login",
+			"register": "Register",
+			"profile": "Profile",
+			"password": "Password",
+			"settings": "Settings",
+			"start": "Start"
+		}
+	}
+}

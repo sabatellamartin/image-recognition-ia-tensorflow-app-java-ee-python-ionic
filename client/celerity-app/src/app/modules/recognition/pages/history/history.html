@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Recognition History</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <button ion-item *ngFor="let query of querys">
+      <ion-thumbnail item-start>
+        <img [src]="getImage(query.encodedFile)">
+      </ion-thumbnail>
+      <h2>{{ query.from }} {{query.to}}</h2>
+      <p>{{ query.date | date }}</p>
+      <button ion-button clear item-end (click)="view(query)">View</button>
+    </button>
+  </ion-list>
+
+  <!--
+  <ion-list>
+    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
+      <ion-icon [name]="item.icon" item-start></ion-icon>
+      {{item.title}}
+      <div class="item-note" item-end>
+        {{item.note}}
+      </div>
+    </button>
+  </ion-list>
+  <div *ngIf="selectedItem" padding>
+    You navigated here from <b>{{selectedItem.title}}</b>
+  </div> -->
+</ion-content>

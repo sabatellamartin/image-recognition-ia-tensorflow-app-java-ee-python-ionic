@@ -1,0 +1,15 @@
+# TensorFlow
+/tensorflow/models/**
+/tensorflow/shared/**
+/tensorflow/source/outputs/**
+/tensorflow/source/catalog/**
+/tensorflow/source/shared/**
+
+# Mongodb
+/mongo/data/db/**
+
+# Postgres
+/postgres/postgres-data/**
+
+# Mysql
+/mysql/mysql-data/**
